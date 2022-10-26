@@ -23,5 +23,9 @@
       "~/*": ["src/*"]
     }
   },
+  "vueCompilerOptions": {
+    "jsxTemplates": true,
+    "experimentalRfc436": true
+  },
   "exclude": ["dist", "node_modules"]
 }

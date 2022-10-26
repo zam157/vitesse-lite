@@ -8,6 +8,7 @@ import Components from 'unplugin-vue-components/vite'
 import AutoImport from 'unplugin-auto-import/vite'
 import Unocss from 'unocss/vite'
 import Layouts from 'vite-plugin-vue-layouts'
+import VueJsx from '@vitejs/plugin-vue-jsx'
 
 export default defineConfig({
   resolve: {
@@ -49,7 +50,22 @@ export default defineConfig({
     // https://github.com/antfu/unocss
     // see unocss.config.ts for config
     Unocss(),
+
+    // https://github.com/vuejs/babel-plugin-jsx
+    // options are passed on to @vue/babel-plugin-jsx
+    VueJsx({
+      optimize: true,
+    }),
   ],
+  server: {
+    proxy: {
+      '/api': {
+        target: 'https://interface.muwai.com',
+        changeOrigin: true,
+        // rewrite: (path) => path.replace(/^\/api/, ''),
+      },
+    },
+  },
 
   // https://github.com/vitest-dev/vitest
   test: {
